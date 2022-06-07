@@ -22,7 +22,7 @@ const Products = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const productstate = useSelector((state) => state.product);
 	const categorystate = useSelector((state) => state.category);
-	// console.log('From main product -- category', categorystate);
+	console.log('From main product -- category', categorystate);
 	// console.log('From main product -- product', productstate);
 
 	const onChangeHandler = (e) => {
@@ -45,9 +45,10 @@ const Products = () => {
 		// for (let pic of productData?.productPictures) {
 		// 	UpdatedProductData.append('productPictures', pic);
 		// }
-		console.log(UpdatedProductData);
+
 		dispatch(AddProductAction(UpdatedProductData));
 		SetProductData(productData);
+		console.log(UpdatedProductData);
 		onClose();
 	};
 
@@ -90,7 +91,7 @@ const Products = () => {
 					onClose={onClose}
 					productData={productData}
 					ProductOnchangeHandler={onChangeHandler}
-					ProductOnHandleSubmit={onHandleSubmit}
+					onHandleSubmit={onHandleSubmit}
 					AddCategoryList={AddCategoryList}
 				/>
 			</Flex>

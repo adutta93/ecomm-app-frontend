@@ -17,6 +17,7 @@ const CategoryPage = () => {
 	const navigate = useNavigate();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const categorystate = useSelector((state) => state.category);
+	console.log('From main category', categorystate);
 	const onChangeHandler = (e) => {
 		e.target.name !== 'categoryImage'
 			? SetCategoryData({ ...categoryData, [e.target.name]: e.target.value })

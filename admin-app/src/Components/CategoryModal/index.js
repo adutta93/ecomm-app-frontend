@@ -35,7 +35,6 @@ const CategoryModalPopup = ({
 	const initialRef = React.useRef();
 	const finalRef = React.useRef();
 	const categorystate = useSelector((state) => state.category);
-	console.log('From category', categorystate);
 
 	return (
 		<>
@@ -72,6 +71,7 @@ const CategoryModalPopup = ({
 								))}
 							</Select>
 						</FormControl>
+						{categoryData?.categoryImage != '' ? <div>{categoryData?.categoryImage[0]}</div> : null}
 						<FormControl mt={4} encType='multipart/form-data'>
 							<FormLabel>Upload Image</FormLabel>
 							{/* value={categoryData?.categoryImage} */}

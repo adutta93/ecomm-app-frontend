@@ -23,16 +23,16 @@ const ProductModalPopup = ({
 	onOpen,
 	onClose,
 	value,
-	ProductOnchangeHandler,
-	ProductOnHandleSubmit,
+	onChangeHandler,
+	onHandleSubmit,
 	AddCategoryList,
 	productData,
 }) => {
 	const initialRef = React.useRef();
 	const finalRef = React.useRef();
 	const categorystate = useSelector((state) => state.category);
-	// console.log('From product -- modal', categorystate);
-
+	// console.log('From modal product -- category', categorystate);
+	console.log(productData?.productPictures);
 	return (
 		<>
 			<Modal
@@ -53,7 +53,7 @@ const ProductModalPopup = ({
 								// ref={initialRef}
 								name='productName'
 								placeholder='Name'
-								onChange={ProductOnchangeHandler}
+								onChange={onChangeHandler}
 								value={productData?.productName}
 							/>
 						</FormControl>
@@ -64,7 +64,7 @@ const ProductModalPopup = ({
 								// ref={initialRef}
 								name='productDescription'
 								placeholder='Product description'
-								onChange={ProductOnchangeHandler}
+								onChange={onChangeHandler}
 								value={productData?.productDescription}
 							/>
 						</FormControl>
@@ -76,7 +76,7 @@ const ProductModalPopup = ({
 									// ref={initialRef}
 									name='productQuantity'
 									placeholder='Quantity'
-									onChange={ProductOnchangeHandler}
+									onChange={onChangeHandler}
 									value={productData?.productQuantity}
 									maxW='90%'
 								/>
@@ -88,7 +88,7 @@ const ProductModalPopup = ({
 									// ref={initialRef}
 									name='productPrice'
 									placeholder='Price'
-									onChange={ProductOnchangeHandler}
+									onChange={onChangeHandler}
 									value={productData?.productPrice}
 									maxW='90%'
 								/>
@@ -97,23 +97,34 @@ const ProductModalPopup = ({
 
 						<FormControl mt={4}>
 							<FormLabel>Choose category</FormLabel>
-							<Select placeholder='Select option' onChange={ProductOnchangeHandler} name='productCategoryId'>
+							<Select
+								placeholder='Select option'
+								onChange={onChangeHandler}
+								name='productCategoryId'
+								value={productData?.productCategoryId}
+							>
 								{AddCategoryList(categorystate.categories).map((option) => (
-									<option key={option.value} value={option.value}>
+									<option key={option.value} value={option.value} onChange={onChangeHandler}>
 										{option.name}
 									</option>
 								))}
 							</Select>
 						</FormControl>
+						{productData?.productPictures.length > 0
+							? productData?.productPictures.length.map((pic, index) => {
+									<div key={index}>{pic}</div>;
+							  })
+							: null}
 						<FormControl mt={4} encType='multipart/form-data'>
 							<FormLabel>Upload Image(s)</FormLabel>
 							{/* value={categoryData?.categoryImage} */}
-							<input type='file' value={''} onChange={ProductOnchangeHandler} name='productPictures' />
+
+							<input type='file' value={''} onChange={onChangeHandler} name='productPictures' />
 						</FormControl>
 					</ModalBody>
 
 					<ModalFooter>
-						<Button colorScheme='blue' mr={3} onClick={ProductOnHandleSubmit}>
+						<Button colorScheme='blue' mr={3} onClick={onHandleSubmit}>
 							Save
 						</Button>
 						<Button onClick={onClose}>Cancel</Button>
